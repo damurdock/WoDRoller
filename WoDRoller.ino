@@ -17,7 +17,7 @@ int roll = 0;
 int c;
 int successes = 0;
 boolean rolled = false;
-String wins = " Successes";
+String wins = " Successe(s)";
 void setup(){
   Serial.begin(9600);
   Serial.print("Rolls: ");
@@ -30,15 +30,14 @@ void loop(){
     Serial.println(c);
     Serial.flush();
     successes = 0;
-    for(int i = c; i > 0; i--){
+    for(c; c > 0; c--){
       roller();
     }
     c = 0;
     rolled = true;
-    wins = successes + wins;
   }
   if(rolled){
-   Serial.println(wins); 
+   Serial.println(successes + wins); 
    wins = " Successe(s)";
    Serial.print("Rolls: ");
   }
@@ -46,11 +45,13 @@ void loop(){
 }
 void roller(){
   roll = TrueRandom.random(1,11);
+  Serial.println(roll);
   if(roll == 10){
   successes ++;
-  roller();
+  //roller();
+  c ++;
   }
-  else if(roll > 7 && roll != 10){
+  if(roll > 7 && roll != 10){
     successes ++;
   }
 }
